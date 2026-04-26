@@ -1,0 +1,22 @@
+sequenceDiagram
+    actor Usuario
+    participant Frontend
+    participant API
+    participant Banco
+
+    Usuario->>Frontend: digita palavra-chave e confirma busca
+    Frontend->>API: GET /busca?q=palavra-chave
+    API->>Banco: SELECT * FROM perguntas WHERE texto LIKE '%palavra-chave%'
+
+    alt perguntas encontradas
+        Banco-->>API: lista de perguntas
+        API-->>Frontend: 200 OK - JSON com perguntas
+        Frontend-->>Usuario: exibe lista de resultados
+    else nenhuma pergunta encontrada
+        Banco-->>API: lista vazia
+        API-->>Frontend: 200 OK - JSON vazio []
+        Frontend-->>Usuario: exibe "Nenhuma pergunta encontrada"
+    else erro no servidor
+        API-->>Frontend: 500 Internal Server Error
+        Frontend-->>Usuario: exibe mensagem de erro
+    end

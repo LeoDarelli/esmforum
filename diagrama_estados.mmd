@@ -1,0 +1,14 @@
+stateDiagram-v2
+    [*] --> Aberta : pergunta criada
+
+    Aberta --> ComRespostas : primeira resposta recebida
+    ComRespostas --> Aberta : única resposta removida
+
+    Aberta --> Encerrada : usuário encerra a pergunta
+    ComRespostas --> Encerrada : usuário encerra a pergunta
+
+    Encerrada --> Aberta : usuário reabre a pergunta
+
+    Encerrada --> [*] : pergunta excluída
+    Aberta --> [*] : pergunta excluída
+    ComRespostas --> [*] : pergunta excluída

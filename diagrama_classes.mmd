@@ -1,0 +1,40 @@
+classDiagram
+    class Usuario {
+        +int id_usuario
+        +string nome
+        +string email
+    }
+
+    class Pergunta {
+        +int id_pergunta
+        +string texto
+        +int id_usuario
+        +int num_respostas
+        +int num_votos
+    }
+
+    class Resposta {
+        +int id_resposta
+        +string texto
+        +int id_pergunta
+        +int id_usuario
+    }
+
+    class Tag {
+        +int id_tag
+        +string nome
+    }
+
+    class Voto {
+        +int id_voto
+        +int id_pergunta
+        +int id_usuario
+        +string tipo
+    }
+
+    Usuario "1" --> "0..*" Pergunta : cria
+    Usuario "1" --> "0..*" Resposta : escreve
+    Usuario "1" --> "0..*" Voto : registra
+    Pergunta "1" --> "0..*" Resposta : recebe
+    Pergunta "1" --> "0..*" Voto : recebe
+    Pergunta "0..*" --> "0..*" Tag : categorizada por

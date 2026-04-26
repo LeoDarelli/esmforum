@@ -1,0 +1,20 @@
+flowchart TD
+    A([Início]) --> B[Usuário visualiza lista de perguntas]
+    B --> C[Usuário clica em upvote ou downvote]
+    C --> D{Usuário já votou\nnesta pergunta?}
+
+    D -->|Não| E[Registrar novo voto no banco]
+    E --> F[Incrementar contador de votos]
+    F --> G[Exibir confirmação visual]
+
+    D -->|Sim| H{O voto é do\nmesmo tipo?}
+
+    H -->|Sim - cancelar voto| I[Remover voto do banco]
+    I --> J[Decrementar contador de votos]
+    J --> G
+
+    H -->|Não - trocar voto| K[Substituir voto no banco]
+    K --> L[Atualizar contador de votos]
+    L --> G
+
+    G --> M([Fim])
