@@ -1,0 +1,23 @@
+classDiagram
+    class GerenciadorRespostas {
+        -observadores: Observador[]
+        +registrar_observador(obs)
+        +cadastrar_resposta(modelo, id_pergunta, texto)
+    }
+
+    class Observador {
+        <<interface>>
+        +notificar(evento)
+    }
+
+    class NotificadorUsuario {
+        +notificar(evento)
+    }
+
+    class LogAuditoria {
+        +notificar(evento)
+    }
+
+    GerenciadorRespostas --> Observador : notifica
+    NotificadorUsuario ..|> Observador : implementa
+    LogAuditoria ..|> Observador : implementa

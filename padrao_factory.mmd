@@ -1,0 +1,27 @@
+classDiagram
+    class PerguntaFactory {
+        +criar(dados)$
+    }
+
+    class Pergunta {
+        <<interface>>
+        +salvar(modelo)
+    }
+
+    class PerguntaSimples {
+        -texto: string
+        -id_usuario: int
+        -tags: array
+        +salvar(modelo)
+    }
+
+    class PerguntaComTags {
+        -texto: string
+        -id_usuario: int
+        -tags: string[]
+        +salvar(modelo)
+    }
+
+    PerguntaFactory --> Pergunta : cria
+    PerguntaSimples ..|> Pergunta : implementa
+    PerguntaComTags ..|> Pergunta : implementa

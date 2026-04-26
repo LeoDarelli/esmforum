@@ -1,0 +1,20 @@
+flowchart TD
+    subgraph Cliente["Cliente (Navegador)"]
+        React["React App\nesmforum-react\nlocalhost:3000"]
+    end
+
+    subgraph Servidor["Servidor (Node.js)"]
+        Routes["Camada de Apresentação\nserver.js\nExpress REST API\nlocalhost:5000"]
+        Modelo["Camada de Dados\nmodelo.js\nAcesso ao banco"]
+    end
+
+    subgraph Banco["Banco de Dados"]
+        SQLite["SQLite\nbd/esmforum.db"]
+    end
+
+    React -->|"HTTP REST (JSON)\nGET / POST"| Routes
+    Routes -->|"Chamadas de função"| Modelo
+    Modelo -->|"SQL queries"| SQLite
+    SQLite -->|"Resultados"| Modelo
+    Modelo -->|"Objetos JS"| Routes
+    Routes -->|"JSON response"| React

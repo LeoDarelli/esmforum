@@ -1,0 +1,19 @@
+flowchart LR
+    Cliente["React\n(Cliente)"]
+
+    subgraph MVC["Backend MVC"]
+        Controller["Controller\nroutes/\nRecebe HTTP\nRetorna JSON"]
+        Service["Model - Serviço\nservicos/\nRegras de negócio"]
+        Repository["Model - Repositório\nrepositorios/\nAcesso ao banco"]
+    end
+
+    BD["SQLite"]
+
+    Cliente -->|"HTTP Request"| Controller
+    Controller -->|"chama"| Service
+    Service -->|"chama"| Repository
+    Repository -->|"SQL"| BD
+    BD -->|"dados"| Repository
+    Repository -->|"objetos JS"| Service
+    Service -->|"resultado"| Controller
+    Controller -->|"JSON (View)"| Cliente

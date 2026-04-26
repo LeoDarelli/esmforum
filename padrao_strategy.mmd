@@ -1,0 +1,28 @@
+classDiagram
+    class ServicoBusca {
+        -estrategia: EstrategiaBusca
+        +constructor(estrategia)
+        +buscar(modelo, parametros)
+    }
+
+    class EstrategiaBusca {
+        <<interface>>
+        +executar(modelo, parametros)
+    }
+
+    class BuscaPorKeyword {
+        +executar(modelo, parametros)
+    }
+
+    class BuscaPorTag {
+        +executar(modelo, parametros)
+    }
+
+    class BuscaSemFiltro {
+        +executar(modelo, parametros)
+    }
+
+    ServicoBusca --> EstrategiaBusca : usa
+    BuscaPorKeyword ..|> EstrategiaBusca : implementa
+    BuscaPorTag ..|> EstrategiaBusca : implementa
+    BuscaSemFiltro ..|> EstrategiaBusca : implementa
